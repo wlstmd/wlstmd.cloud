@@ -1,0 +1,8 @@
+# Full-resolution source photos — only the optimized *-web.jpg copies are
+# actually referenced by the site. These originals are kept locally for
+# re-exporting if the crop/quality ever needs revisiting, but at 10-20MB+
+# each they don't belong in the repo.
+images/profile.png
+images/cc1.png
+images/cc2.png
+images/cc3.png

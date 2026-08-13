@@ -10,13 +10,10 @@
   --material: rgba(255, 255, 255, 0.055);
   --material-hover: rgba(255, 255, 255, 0.09);
   --accent: #0a84ff;
-  --accent-soft: rgba(10, 132, 255, 0.16);
-  --red: #ff453a;
   --gold: #ffd60a;
 
   --radius-lg: 26px;
   --radius-md: 18px;
-  --radius-sm: 12px;
 
   --ease-out: cubic-bezier(0.32, 0.72, 0, 1);
   --dur-fast: 120ms;
@@ -35,10 +32,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 a { color: inherit; text-decoration: none; }
-
-.mono {
-  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
-}
 
 /* ---------- nav ---------- */
 .navbar {
@@ -158,7 +151,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 0.92rem;
   letter-spacing: -0.005em;
 }
-.achievement-line strong { color: #ffd60a; font-weight: 600; }
+.achievement-line strong { color: var(--gold); font-weight: 600; }
 
 .cta-row {
   display: flex;
@@ -220,6 +213,190 @@ a { color: inherit; text-decoration: none; }
 }
 .scroll-down:hover { color: var(--text); border-color: rgba(255, 255, 255, 0.2); transform: translate(-50%, 2px); }
 
+/* ---------- macbook scroll scene ----------
+   .macbook reads two variables driven by a scroll listener that's only
+   attached while the section is near the viewport (see script):
+     --open    0 (fully closed) → 1 (fully open), drives the lid rotation
+     --content 0 → 1, a quick fade for the on-screen card right after opening
+   The four .screen-photo layers behind the card get an .is-active class
+   toggled by the same scroll handler, cross-fading via CSS transition.
+   Falls back to a static, fully-open state with no JS/scroll cost when
+   prefers-reduced-motion, narrow viewports, or no JS is present. */
+.macbook-pin-wrap { position: relative; height: 280vh; }
+.macbook-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--bg-elevated), #000 40%);
+}
+.macbook {
+  --open: 1;
+  --content: 1;
+  --photo-filter: saturate(0.94) contrast(1.04) brightness(0.97);
+  width: min(880px, 84vw);
+  perspective: 2200px;
+}
+.macbook-lid {
+  position: relative;
+  aspect-ratio: 16 / 10.4;
+  margin: 0 auto;
+  background: linear-gradient(160deg, #e4e4e7, #c6c6ca 55%, #a9a9ad);
+  border-radius: 16px 16px 5px 5px;
+  transform-origin: 50% 100%;
+  transform: rotateX(calc(-84deg * (1 - var(--open))));
+  box-shadow: 0 50px 100px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(255, 255, 255, 0.5), inset 0 0 0 7px #1a1a1c;
+  will-change: transform;
+}
+.macbook-lid::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 8%;
+  right: 8%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+}
+.macbook-logo {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.05) 70%);
+  transform: translate(-50%, -50%);
+  opacity: calc(1 - var(--open));
+}
+.macbook-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 110px;
+  height: 15px;
+  background: #000;
+  border-radius: 0 0 9px 9px;
+  transform: translateX(-50%);
+}
+.macbook-screen {
+  position: absolute;
+  inset: 14px;
+  border-radius: 9px;
+  background: #000;
+  overflow: hidden;
+}
+.screen-photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0;
+  filter: var(--photo-filter);
+  transform: scale(1.05);
+  transition: opacity 900ms var(--ease-out), transform 6000ms linear;
+}
+.screen-photo.is-active { opacity: 1; transform: scale(1); }
+.screen-photo-profile {
+  background-image: url("./images/profile-web.jpg");
+  background-position: 50% 32%;
+  filter: var(--photo-filter) blur(3px);
+  transform: scale(1.08);
+}
+.screen-photo-profile.is-active { transform: scale(1.03); }
+.screen-photo-cc1 { background-image: url("./images/cc1-web.jpg"); background-position: 50% 25%; }
+.screen-photo-cc2 { background-image: url("./images/cc2-web.jpg"); background-position: 50% 32%; }
+.screen-photo-cc3 { background-image: url("./images/cc3-web.jpg"); background-position: 50% 50%; }
+.screen-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.32) 46%, rgba(0, 0, 0, 0.14) 100%),
+    radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.28) 100%);
+}
+.screen-content {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 8% 9%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: var(--content);
+  transform: translateY(calc(18px * (1 - var(--content))));
+}
+.screen-dots { display: flex; gap: 7px; margin-bottom: clamp(14px, 4vw, 30px); }
+.screen-dots span { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.32); }
+.screen-eyebrow {
+  color: rgba(255, 255, 255, 0.6);
+  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  font-size: clamp(0.62rem, 1.4vw, 0.8rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.screen-content h3 {
+  color: #fff;
+  font-size: clamp(1.4rem, 4.6vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.screen-role {
+  margin-top: 6px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(0.78rem, 1.8vw, 1rem);
+}
+.screen-stats {
+  display: flex;
+  gap: clamp(20px, 5vw, 44px);
+  margin-top: clamp(16px, 4vw, 34px);
+}
+.screen-stats strong { display: block; color: #7db7ff; font-size: clamp(1.1rem, 3vw, 1.7rem); font-weight: 700; letter-spacing: -0.02em; }
+.screen-stats span { color: rgba(255, 255, 255, 0.58); font-size: clamp(0.62rem, 1.4vw, 0.78rem); }
+.macbook-base {
+  position: relative;
+  width: 116%;
+  margin: 0 -8%;
+  height: 30px;
+  background: linear-gradient(180deg, #eeeef1 0%, #d2d2d7 45%, #aaaab0 85%, #8e8e94 100%);
+  border-radius: 3px 3px 18px 18px;
+  box-shadow: 0 26px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+.macbook-base::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 5px;
+  width: 64px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.16);
+  border-radius: 2px;
+  transform: translateX(-50%);
+}
+.macbook-hinge {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 90px;
+  height: 5px;
+  background: #111;
+  border-radius: 3px;
+  transform: translateX(-50%);
+}
+.macbook-trackpad {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  width: 20%;
+  height: 16px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  transform: translateX(-50%);
+}
+
 /* ---------- layout ---------- */
 .container { position: relative; z-index: 2; width: min(1100px, calc(100% - 48px)); margin: 0 auto; padding: 10px 0 64px; }
 .section { margin-bottom: 104px; }
@@ -233,6 +410,86 @@ a { color: inherit; text-decoration: none; }
    timing, so the same easing drives both the reveal and later hover states. */
 .js :where(.reveal) { opacity: 0; transform: translateY(22px); }
 .js :where(.reveal.is-visible) { opacity: 1; transform: none; }
+
+/* ---------- about ---------- */
+.about-bio {
+  max-width: 620px;
+  margin-bottom: 40px;
+  color: var(--text-secondary);
+  font-size: 1.08rem;
+  line-height: 1.6;
+  letter-spacing: -0.005em;
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 40px;
+}
+.about-block {
+  padding: 20px 22px;
+  border: 1px solid var(--separator);
+  border-radius: var(--radius-md);
+  background: var(--material);
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+}
+.about-label { color: var(--text-tertiary); font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+.about-value { color: var(--text); font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; }
+.about-sub { margin-top: 5px; color: var(--text-tertiary); font-size: 0.82rem; }
+
+.cert-list { display: flex; flex-direction: column; }
+.cert-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-top: 1px solid var(--separator);
+}
+.cert-list li:first-child { border-top: none; padding-top: 2px; }
+.cert-list li span { color: var(--text); font-size: 0.94rem; font-weight: 600; letter-spacing: -0.01em; }
+.cert-list li time { flex-shrink: 0; color: var(--text-tertiary); font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace; font-size: 0.76rem; }
+
+.stack-group { margin-bottom: 24px; transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+.stack-group .about-label { margin-bottom: 12px; }
+.stack-pills { display: flex; flex-wrap: wrap; gap: 10px; }
+.stack-pill {
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(10, 132, 255, 0.28);
+  background: rgba(10, 132, 255, 0.1);
+  color: #cfe6ff;
+  font-size: 0.86rem;
+  font-weight: 500;
+}
+.stack-pill-muted {
+  border-color: var(--separator);
+  background: var(--material);
+  color: var(--text-secondary);
+}
+
+/* ---------- blog banner ---------- */
+.blog-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 36px 40px;
+  border: 1px solid var(--separator);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(10, 132, 255, 0.1), var(--material));
+  transition: transform var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out), opacity var(--dur-slow) var(--ease-out);
+}
+.blog-banner:hover { transform: translateY(-3px); border-color: rgba(255, 255, 255, 0.16); }
+.blog-banner .kicker { color: var(--text-tertiary); font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace; font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; }
+.blog-banner h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 700; letter-spacing: -0.03em; color: #fff; }
+.blog-desc { margin-top: 8px; color: var(--text-secondary); font-size: 0.98rem; max-width: 440px; }
+.blog-banner .btn-primary { flex-shrink: 0; }
 
 /* ---------- awards ---------- */
 .bento {
@@ -359,6 +616,13 @@ a { color: inherit; text-decoration: none; }
   .domain-name { font-size: clamp(2.8rem, 13vw, 5rem); }
   .sites-grid, .connect-grid { grid-template-columns: 1fr; }
   .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .about-grid { grid-template-columns: 1fr; }
+}
+/* Matches the JS animation guard (min-width: 701px): below this, the
+   MacBook scene drops the scroll-pin trick entirely and just sits static. */
+@media (max-width: 700px) {
+  .macbook-pin-wrap { height: auto; }
+  .macbook-pin { position: static; height: auto; padding: 64px 20px; }
 }
 @media (max-width: 560px) {
   .navbar { padding-left: 20px; padding-right: 20px; }
@@ -368,6 +632,8 @@ a { color: inherit; text-decoration: none; }
   .btn-primary { width: 100%; justify-content: center; }
   .bento { grid-template-columns: 1fr 1fr; gap: 10px; }
   .footer { flex-direction: column; gap: 6px; }
+  .blog-banner { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
+  .blog-banner .btn-primary { width: 100%; justify-content: center; }
 }
 
 /* ---------- reduced motion ---------- */
@@ -378,7 +644,7 @@ a { color: inherit; text-decoration: none; }
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-  .site-card:hover, .connect-card:hover, .bento-card:hover, .btn-primary:hover {
+  .site-card:hover, .connect-card:hover, .bento-card:hover, .btn-primary:hover, .blog-banner:hover {
     transform: none !important;
   }
   .reveal, .js .reveal { opacity: 1 !important; transform: none !important; }
