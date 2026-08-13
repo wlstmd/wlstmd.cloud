@@ -1,9 +1,13 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
     <link rel="icon" href="./images/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="./style.css" />
     <link
       rel="stylesheet"
@@ -13,143 +17,169 @@
   </head>
 
   <body>
-    <div class="corner tl"></div>
-    <div class="corner tr"></div>
-    <div class="corner bl"></div>
-    <div class="corner br"></div>
+    <nav class="navbar" id="navbar">
+      <a href="#top" class="brand">
+        <img src="./images/logo.png" alt="" class="brand-mark" />
+        <span>wlstmd.cloud</span>
+      </a>
+      <div class="navbar-links">
+        <a href="#awards">Awards</a>
+        <a href="#nodes">Nodes</a>
+        <a href="#connect">Connect</a>
+      </div>
+      <div class="clock-strip">
+        <span id="clock">00:00:00</span>
+        <span id="date-str">2026.01.01</span>
+      </div>
+    </nav>
 
-    <header class="hero">
+    <header class="hero" id="top">
       <div class="ambient"></div>
-      <div class="grain"></div>
-      <div class="stage-light"></div>
-
-      <nav class="topbar">
-        <span class="top-label">personal / cloud / infrastructure</span>
-        <div class="clock-strip">
-          <div id="clock"></div>
-          <div id="date-str"></div>
-        </div>
-      </nav>
 
       <div class="hero-inner">
-        <div class="hero-copy">
-          <div class="award-kicker">
-            <span></span>
-            WorldSkills Korea · Cloud Computing
-          </div>
+        <p class="eyebrow">WorldSkills Korea · Cloud Computing</p>
 
-          <h1 class="domain-name">wlstmd<span>.cloud</span></h1>
+        <h1 class="domain-name">wlstmd<span>.cloud</span></h1>
 
-          <p class="hero-desc">
-            A personal gateway for cloud labs, experiments, notes, and services.
-          </p>
+        <p class="hero-desc">
+          A personal gateway for cloud labs, experiments, notes, and services.
+        </p>
 
-          <div class="achievement-line">
-            <strong>2025</strong>
-            <span>Regional Silver · National Excellence Award</span>
-          </div>
+        <p class="achievement-line">
+          <strong>2025</strong> Regional Silver · National Excellence Award
+        </p>
 
-          <div class="meta">
-            <a href="https://github.com/wlstmd" target="_blank">by @wlstmd</a>
-            <span>cloud native playground</span>
-            <span class="danger">unstable by design</span>
-          </div>
+        <div class="cta-row">
+          <a href="https://github.com/wlstmd" target="_blank" class="btn-primary">
+            <i class="fa-brands fa-github"></i> View GitHub
+          </a>
+          <a href="#nodes" class="btn-link">
+            Explore nodes <i class="fa-solid fa-chevron-right"></i>
+          </a>
         </div>
 
-        <div class="award-showcase" aria-label="WorldSkills Korea awards showcase">
-          <div class="showcase-glow"></div>
-
-          <div class="certificate-card cert-back">
-            <img src="./images/national-certificate.jpg" alt="WorldSkills Korea national certificate" />
-          </div>
-
-          <div class="certificate-card cert-front">
-            <img src="./images/regional-certificate.jpg" alt="WorldSkills Korea regional certificate" />
-          </div>
-
-          <div class="medal-card">
-            <img src="./images/medal-case.jpg" alt="WorldSkills Korea medal" />
-            <div>
-              <small>Silver Medal</small>
-              <strong>Cloud Computing</strong>
-            </div>
-          </div>
-        </div>
+        <p class="hero-footnote">cloud native playground — unstable by design</p>
       </div>
 
-      <a href="#nodes" class="scroll-down" aria-label="Scroll down">
-        <span>scroll to explore</span>
+      <a href="#awards" class="scroll-down" aria-label="Scroll down">
         <i class="fa-solid fa-chevron-down"></i>
       </a>
     </header>
 
     <main class="container">
+      <section id="awards" class="section">
+        <div class="section-title reveal">
+          <p class="kicker">2025 · worldskills korea</p>
+          <h2>Recognition</h2>
+        </div>
+
+        <div class="bento">
+          <a class="bento-card bento-desk reveal" href="#" onclick="return false;">
+            <img src="./images/award-desk.jpg" alt="WorldSkills Korea award desk" loading="lazy" decoding="async" />
+            <div class="bento-caption">
+              <strong>WorldSkills Korea 2025</strong>
+              <small>National Finals</small>
+            </div>
+          </a>
+
+          <a class="bento-card bento-medal reveal" href="#" onclick="return false;">
+            <img src="./images/medal-case.jpg" alt="WorldSkills Korea medal" loading="lazy" decoding="async" />
+            <div class="bento-caption">
+              <strong>Silver Medal</strong>
+              <small>Cloud Computing</small>
+            </div>
+          </a>
+
+          <a class="bento-card bento-regional reveal" href="#" onclick="return false;">
+            <img src="./images/regional-certificate.jpg" alt="WorldSkills Korea regional certificate" loading="lazy" decoding="async" />
+            <div class="bento-caption">
+              <strong>Regional Certificate</strong>
+              <small>Excellence Award</small>
+            </div>
+          </a>
+
+          <a class="bento-card bento-national reveal" href="#" onclick="return false;">
+            <img src="./images/national-certificate.jpg" alt="WorldSkills Korea national certificate" loading="lazy" decoding="async" />
+            <div class="bento-caption">
+              <strong>National Certificate</strong>
+              <small>Regional Silver</small>
+            </div>
+          </a>
+        </div>
+      </section>
+
       <section id="nodes" class="section">
-        <div class="section-title">
-          <span></span>
-          <p>public nodes</p>
+        <div class="section-title reveal">
+          <p class="kicker">infrastructure</p>
+          <h2>Nodes</h2>
         </div>
 
         <div class="sites-grid">
-          <a href="https://terminal.wlstmd.cloud" target="_blank" class="site-card">
-            <div class="site-icon"><i class="fa-solid fa-terminal"></i></div>
+          <a href="https://terminal.wlstmd.cloud" target="_blank" class="site-card reveal">
+            <div class="site-icon" style="--tint: 142,142,147"><i class="fa-solid fa-terminal"></i></div>
             <div class="site-info"><strong>Terminal</strong><small>terminal.wlstmd.cloud</small></div>
             <i class="fa-solid fa-arrow-up-right-from-square arrow"></i>
           </a>
-          <a href="https://blog.wlstmd.cloud" target="_blank" class="site-card">
-            <div class="site-icon"><i class="fa-regular fa-file-lines"></i></div>
+          <a href="https://blog.wlstmd.cloud" target="_blank" class="site-card reveal">
+            <div class="site-icon" style="--tint: 10,132,255"><i class="fa-regular fa-file-lines"></i></div>
             <div class="site-info"><strong>Blog</strong><small>blog.wlstmd.cloud</small></div>
             <i class="fa-solid fa-arrow-up-right-from-square arrow"></i>
           </a>
-          <a href="https://portfolio.wlstmd.cloud" target="_blank" class="site-card">
-            <div class="site-icon"><i class="fa-regular fa-window-maximize"></i></div>
+          <a href="https://portfolio.wlstmd.cloud" target="_blank" class="site-card reveal">
+            <div class="site-icon" style="--tint: 191,90,242"><i class="fa-regular fa-window-maximize"></i></div>
             <div class="site-info"><strong>Portfolio</strong><small>portfolio.wlstmd.cloud</small></div>
             <i class="fa-solid fa-arrow-up-right-from-square arrow"></i>
           </a>
-          <a href="https://linux.wlstmd.cloud" target="_blank" class="site-card">
-            <div class="site-icon"><i class="fa-brands fa-linux"></i></div>
+          <a href="https://linux.wlstmd.cloud" target="_blank" class="site-card reveal">
+            <div class="site-icon" style="--tint: 255,159,10"><i class="fa-brands fa-linux"></i></div>
             <div class="site-info"><strong>Linux</strong><small>linux.wlstmd.cloud</small></div>
             <i class="fa-solid fa-arrow-up-right-from-square arrow"></i>
           </a>
-          <a href="https://web.wlstmd.cloud" target="_blank" class="site-card">
-            <div class="site-icon"><i class="fa-solid fa-globe"></i></div>
+          <a href="https://web.wlstmd.cloud" target="_blank" class="site-card reveal">
+            <div class="site-icon" style="--tint: 100,210,255"><i class="fa-solid fa-globe"></i></div>
             <div class="site-info"><strong>Web</strong><small>web.wlstmd.cloud</small></div>
             <i class="fa-solid fa-arrow-up-right-from-square arrow"></i>
           </a>
-          <a href="https://tree.wlstmd.cloud" target="_blank" class="site-card">
-            <div class="site-icon"><i class="fa-solid fa-seedling"></i></div>
+          <a href="https://tree.wlstmd.cloud" target="_blank" class="site-card reveal">
+            <div class="site-icon" style="--tint: 48,209,88"><i class="fa-solid fa-seedling"></i></div>
             <div class="site-info"><strong>Tree</strong><small>tree.wlstmd.cloud</small></div>
             <i class="fa-solid fa-arrow-up-right-from-square arrow"></i>
           </a>
-          <a href="https://keycap.wlstmd.cloud" target="_blank" class="site-card">
-            <div class="site-icon"><i class="fa-solid fa-keyboard"></i></div>
+          <a href="https://keycap.wlstmd.cloud" target="_blank" class="site-card reveal">
+            <div class="site-icon" style="--tint: 255,55,95"><i class="fa-solid fa-keyboard"></i></div>
             <div class="site-info"><strong>Keycap</strong><small>keycap.wlstmd.cloud</small></div>
             <i class="fa-solid fa-arrow-up-right-from-square arrow"></i>
           </a>
-          <a href="https://kmu-room-finder.netlify.app" target="_blank" class="site-card">
-            <div class="site-icon"><i class="fa-solid fa-university"></i></div>
+          <a href="https://kmu-room-finder.netlify.app" target="_blank" class="site-card reveal">
+            <div class="site-icon" style="--tint: 94,92,230"><i class="fa-solid fa-university"></i></div>
             <div class="site-info"><strong>KMU Room Finder</strong><small>kmu-room-finder.netlify.app</small></div>
             <i class="fa-solid fa-arrow-up-right-from-square arrow"></i>
           </a>
         </div>
       </section>
 
-      <section class="section connect-section">
-        <div class="section-title"><span></span><p>connect</p></div>
+      <section id="connect" class="section connect-section">
+        <div class="section-title reveal">
+          <p class="kicker">elsewhere</p>
+          <h2>Connect</h2>
+        </div>
         <div class="connect-grid">
-          <a href="https://github.com/wlstmd" target="_blank" class="connect-card">
-            <i class="fa-brands fa-github"></i><div><strong>GitHub</strong><small>github.com/wlstmd</small></div><i class="fa-solid fa-arrow-up-right-from-square arrow"></i>
+          <a href="https://github.com/wlstmd" target="_blank" class="connect-card reveal">
+            <i class="fa-brands fa-github" style="--tint: 210,210,215"></i><div><strong>GitHub</strong><small>github.com/wlstmd</small></div><i class="fa-solid fa-arrow-up-right-from-square arrow"></i>
           </a>
-          <a href="https://www.linkedin.com/in/wlstmd" target="_blank" class="connect-card">
-            <i class="fa-brands fa-linkedin"></i><div><strong>LinkedIn</strong><small>linkedin.com/in/wlstmd</small></div><i class="fa-solid fa-arrow-up-right-from-square arrow"></i>
+          <a href="https://www.linkedin.com/in/wlstmd" target="_blank" class="connect-card reveal">
+            <i class="fa-brands fa-linkedin" style="--tint: 10,132,255"></i><div><strong>LinkedIn</strong><small>linkedin.com/in/wlstmd</small></div><i class="fa-solid fa-arrow-up-right-from-square arrow"></i>
           </a>
-          <a href="https://www.instagram.com/wlstmd_" target="_blank" class="connect-card">
-            <i class="fa-brands fa-instagram"></i><div><strong>Instagram</strong><small>instagram.com/wlstmd_</small></div><i class="fa-solid fa-arrow-up-right-from-square arrow"></i>
+          <a href="https://www.instagram.com/wlstmd_" target="_blank" class="connect-card reveal">
+            <i class="fa-brands fa-instagram" style="--tint: 255,55,95"></i><div><strong>Instagram</strong><small>instagram.com/wlstmd_</small></div><i class="fa-solid fa-arrow-up-right-from-square arrow"></i>
           </a>
         </div>
       </section>
 
-      <footer class="footer"><span>© 2026 wlstmd.cloud</span><span>All rights reserved.</span></footer>
+      <footer class="footer">
+        <span>© 2026 wlstmd.cloud</span>
+        <span>All rights reserved.</span>
+      </footer>
     </main>
 
     <script>
@@ -161,6 +191,43 @@
       }
       tick();
       setInterval(tick, 1000);
+
+      const navbar = document.getElementById("navbar");
+      const onScroll = () => {
+        navbar.classList.toggle("is-scrolled", window.scrollY > 24);
+      };
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const revealEls = document.querySelectorAll(".reveal");
+      if (reduceMotion || !("IntersectionObserver" in window)) {
+        revealEls.forEach((el) => el.classList.add("is-visible"));
+      } else {
+        const groups = new Map();
+        revealEls.forEach((el) => {
+          const key = el.parentElement;
+          if (!groups.has(key)) groups.set(key, []);
+          groups.get(key).push(el);
+        });
+        revealEls.forEach((el) => {
+          const siblings = groups.get(el.parentElement);
+          const index = siblings.indexOf(el);
+          el.style.transitionDelay = `${Math.min(index * 60, 240)}ms`;
+        });
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
+        );
+        revealEls.forEach((el) => observer.observe(el));
+      }
     </script>
   </body>
 </html>
