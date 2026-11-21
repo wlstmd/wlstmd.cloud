@@ -2,7 +2,15 @@
 # actually referenced by the site. These originals are kept locally for
 # re-exporting if the crop/quality ever needs revisiting, but at 10-20MB+
 # each they don't belong in the repo.
-images/profile.png
-images/cc1.png
-images/cc2.png
-images/cc3.png
+public/images/profile.png
+public/images/cc1.png
+public/images/cc2.png
+public/images/cc3.png
+
+# next.js
+node_modules/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+.env*.local
