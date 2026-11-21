@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import type { ComponentProps, PointerEvent, ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
 export function Reveal({
   children,
@@ -28,44 +28,19 @@ export function Reveal({
   );
 }
 
-export function SectionHeader({
-  index,
-  kicker,
-  title,
-  aside,
-}: {
-  index: string;
-  kicker: string;
-  title: ReactNode;
-  aside?: ReactNode;
-}) {
+export function SectionHeader({ title, aside }: { title: ReactNode; aside?: ReactNode }) {
   return (
     <Reveal className="mb-12 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between">
-      <div>
-        <p className="mb-4 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] text-muted">
-          <span className="text-accent">{index}</span>
-          <span className="h-px w-8 bg-line-strong" />
-          {kicker}
-        </p>
-        <h2 className="text-4xl font-semibold tracking-tight text-balance md:text-6xl">{title}</h2>
-      </div>
-      {aside && <div className="max-w-sm text-sm leading-relaxed text-muted">{aside}</div>}
+      <h2 className="text-3xl font-semibold tracking-tight text-balance md:text-[2.6rem] md:leading-[1.15]">{title}</h2>
+      {aside && <div className="max-w-sm text-[15px] leading-relaxed text-muted">{aside}</div>}
     </Reveal>
   );
-}
-
-export function trackSpotlight(e: PointerEvent<HTMLElement>) {
-  const el = e.currentTarget;
-  const r = el.getBoundingClientRect();
-  el.style.setProperty("--x", `${e.clientX - r.left}px`);
-  el.style.setProperty("--y", `${e.clientY - r.top}px`);
 }
 
 export function Card({ className = "", children, ...rest }: ComponentProps<"div">) {
   return (
     <div
-      onPointerMove={trackSpotlight}
-      className={`spotlight rounded-3xl border border-line bg-surface ${className}`}
+      className={`rounded-3xl border border-line bg-surface ${className}`}
       {...rest}
     >
       {children}

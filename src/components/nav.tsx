@@ -72,7 +72,7 @@ export function Nav() {
         <div className="flex items-center gap-2">
           <button
             onClick={openPalette}
-            className="flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 font-mono text-xs text-muted transition-colors hover:border-line-strong hover:text-fg"
+            className="flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 text-xs text-muted transition-colors hover:border-line-strong hover:text-fg"
             aria-label="Open command palette"
           >
             <Command className="size-3.5" />
@@ -97,7 +97,7 @@ export function Nav() {
             exit={{ opacity: 0, y: -8 }}
             className="absolute inset-x-4 top-[72px] rounded-3xl border border-line bg-surface/95 p-3 backdrop-blur-xl md:hidden"
           >
-            {nav.map((item, i) => (
+            {nav.map((item) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
@@ -105,7 +105,6 @@ export function Nav() {
                 className="flex items-center justify-between rounded-2xl px-4 py-3 text-lg hover:bg-white/5"
               >
                 {item.label}
-                <span className="font-mono text-xs text-faint">0{i + 1}</span>
               </a>
             ))}
           </motion.div>

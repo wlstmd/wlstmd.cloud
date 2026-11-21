@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # daily rebuild so the blog post count stays current (00:00 KST)
+  schedule:
+    - cron: "0 15 * * *"
 
 permissions:
   contents: read
@@ -25,6 +28,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
@@ -38,3 +43,12 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # Vercel only redeploys on git pushes, so trigger it on the daily schedule too
+  refresh-vercel:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: '[ -n "$HOOK" ] && curl -fsS -X POST "$HOOK" > /dev/null'

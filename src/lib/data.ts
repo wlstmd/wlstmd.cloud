@@ -4,17 +4,30 @@ export const profile = {
   handle: "wlstmd",
   role: "DevOps Engineer",
   tagline: "in training",
-  location: "Gyeongbuk, Korea",
-  bio: "Aspiring DevOps engineer studying Software Development at Gyeongbuk Software Meister High School. I like automating away repetitive work, sharing what I learn, and building things with a team rather than alone.",
+  location: "Daegu, Korea",
+  bio: "Aspiring DevOps engineer and first-year student at Keimyung University's Tabula Rasa College. I like automating away repetitive work, sharing what I learn, and building things with a team rather than alone.",
   github: "https://github.com/wlstmd",
   blog: "https://blog.wlstmd.cloud",
 };
 
-export const education = {
-  school: "Gyeongbuk Software Meister High School",
-  major: "Software Development",
-  period: "2023.03 — 2026.01",
-};
+export const education = [
+  {
+    school: "Keimyung University",
+    major: "Tabula Rasa College",
+    period: "2026.03 — Present",
+    note: "GPA 4.5 / 4.5",
+  },
+  {
+    school: "Gyeongbuk Software Meister High School",
+    major: "Software Development",
+    period: "2023.03 — 2026.01",
+    note: null,
+  },
+];
+
+export const activities = [
+  { name: "LIKELION Univ.", nameKo: "멋쟁이사자처럼 대학", role: "Keimyung · Member (아기사자)", period: "2026" },
+];
 
 export const certifications = [
   { name: "정보처리산업기사", en: "Industrial Engineer Information Processing", date: "2024.12" },
@@ -38,28 +51,12 @@ export type Award = {
 
 export const awards: Award[] = [
   {
-    src: "/images/award-desk.jpg",
-    alt: "WorldSkills Korea regional silver medal and certificate on a desk",
-    title: "Regional Finals",
-    caption: "Gyeongbuk · Silver",
-    width: 900,
-    height: 1599,
-  },
-  {
     src: "/images/cc1-web.jpg",
     alt: "Cloud Computing competition venue at the 60th National Skills Competition",
     title: "National Finals Venue",
     caption: "Gwangju · 2025.09",
     width: 1125,
     height: 1500,
-  },
-  {
-    src: "/images/medal-case.jpg",
-    alt: "WorldSkills Korea silver medal in its case",
-    title: "Silver Medal",
-    caption: "Cloud Computing",
-    width: 385,
-    height: 460,
   },
   {
     src: "/images/cc3-web.jpg",
@@ -113,6 +110,8 @@ export const timeline = [
 export type Service = {
   name: string;
   url: string;
+  // behind a sign-in wall: an auth redirect/404 still means the app is up
+  auth?: boolean;
 };
 
 export const services: Service[] = [
@@ -126,13 +125,12 @@ export const services: Service[] = [
   { name: "KMU Room Finder", url: "https://kmu-room-finder.netlify.app" },
   { name: "Notion Dashboard", url: "https://notion-dashboard.wlstmd.cloud" },
   { name: "Metro Mate", url: "https://metro-mate.netlify.app" },
-  { name: "AI Tools", url: "https://ai-tools.wlstmd.cloud" },
+  { name: "AI Tools", url: "https://ai-tools.wlstmd.cloud", auth: true },
 ];
 
 export const stats = [
-  { value: "40+", label: "Blog posts" },
   { value: "3", label: "Certifications" },
-  { value: String(services.length), label: "Live services" },
+  { value: "4.5", label: "GPA / 4.5" },
   { value: "4th", label: "National finals" },
 ];
 
@@ -142,8 +140,22 @@ export const socials = [
   { name: "Instagram", handle: "instagram.com/wlstmd_", url: "https://www.instagram.com/wlstmd_", icon: "instagram" },
 ] as const;
 
+// Repos featured in the Work section, in display order. Live details
+// (description, stars, language) are pulled from GitHub at build time.
+export const featuredRepos = [
+  "k8s-rightsizing-recommender",
+  "ebpf-anomaly-detector",
+  "lab",
+  "eks-provision",
+  "kro-ack-infra",
+  "daegu-transit-mcp",
+  "keimyung-room-finder",
+  "metro-mate",
+];
+
 export const nav = [
   { id: "about", label: "About" },
+  { id: "work", label: "Work" },
   { id: "awards", label: "Awards" },
   { id: "services", label: "Services" },
   { id: "writing", label: "Writing" },

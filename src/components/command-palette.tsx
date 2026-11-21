@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowUpRight, CornerDownLeft, Hash, Search } from "lucide-react";
-import { nav, services, socials } from "@/lib/data";
+import { featuredRepos, nav, services, socials } from "@/lib/data";
 
 const OPEN_EVENT = "palette:open";
 
@@ -20,6 +20,13 @@ const items: Item[] = [
     label: s.name,
     hint: new URL(s.url).host,
     href: s.url,
+    external: true,
+  })),
+  ...featuredRepos.map((name) => ({
+    group: "Work",
+    label: name,
+    hint: "github.com",
+    href: `https://github.com/wlstmd/${name}`,
     external: true,
   })),
   ...socials.map((s) => ({ group: "Elsewhere", label: s.name, hint: s.handle, href: s.url, external: true })),
@@ -134,7 +141,7 @@ export function CommandPalette() {
                 return (
                   <li key={`${item.group}-${item.label}`}>
                     {header && (
-                      <p className="px-3 pb-1.5 pt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-faint">
+                      <p className="px-3 pb-1.5 pt-3 text-xs text-faint">
                         {header}
                       </p>
                     )}
@@ -148,8 +155,8 @@ export function CommandPalette() {
                     >
                       {item.external ? <ArrowUpRight className="size-4" /> : <Hash className="size-4" />}
                       <span className="flex-1">{item.label}</span>
-                      <span className="font-mono text-xs text-faint">{item.hint}</span>
-                      {cursor === i && <CornerDownLeft className="size-3.5 text-accent" />}
+                      <span className="text-xs text-faint">{item.hint}</span>
+                      {cursor === i && <CornerDownLeft className="size-3.5 text-muted" />}
                     </button>
                   </li>
                 );

@@ -72,13 +72,13 @@ function Terminal() {
               line.kind === "cmd" ? "pt-2 text-fg first:pt-0" : line.kind === "table" ? "text-faint" : "text-muted"
             }`}
           >
-            {line.kind === "cmd" && <span className="mr-2 text-accent">❯</span>}
+            {line.kind === "cmd" && <span className="mr-2 text-live">❯</span>}
             {line.text}
           </motion.p>
         ))}
         <p className="pt-2">
-          <span className="mr-2 text-accent">❯</span>
-          <span className="inline-block h-4 w-2 translate-y-0.5 animate-blink bg-fg" />
+          <span className="mr-2 text-live">❯</span>
+          <span className="inline-block h-4 w-2 translate-y-0.5 bg-fg/70" />
         </p>
       </div>
     </div>
@@ -93,28 +93,24 @@ export function Hero() {
 
   return (
     <section id="top" className="relative flex min-h-svh flex-col overflow-hidden pt-28">
-      {/* backdrop */}
-      <div className="pointer-events-none absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_70%_60%_at_50%_30%,black,transparent)]" />
-      <div className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-accent/[0.09] blur-[120px]" />
 
       <motion.div style={{ y, opacity }} className="relative mx-auto flex w-full max-w-6xl flex-1 flex-col px-5 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease }}
-          className="mb-10 inline-flex w-fit items-center gap-2.5 rounded-full border border-line bg-surface/80 py-1.5 pl-2 pr-4 text-xs text-muted backdrop-blur"
+          className="mb-8 text-sm text-muted"
         >
-          <span className="size-2 animate-pulse-dot rounded-full bg-accent" />
           WorldSkills Korea 2025 · Cloud Computing
         </motion.div>
 
         <div className="grid flex-1 items-center gap-14 lg:grid-cols-[1.15fr_1fr]">
           <div>
-            <h1 className="text-[clamp(3.2rem,10vw,7.5rem)] font-semibold leading-[0.9] tracking-[-0.045em]">
-              {["Jinseung", "Yu."].map((word, i) => (
+            <h1 className="text-[clamp(2.6rem,6vw,4.5rem)] font-semibold leading-[1] tracking-[-0.04em]">
+              {["Jinseung", "Yu"].map((word, i) => (
                 <span key={word} className="block overflow-hidden pb-[0.08em]">
                   <motion.span
-                    className={`block ${i === 1 ? "text-outline" : ""}`}
+                    className={`block ${i === 1 ? "text-muted" : ""}`}
                     initial={{ y: "105%" }}
                     animate={{ y: 0 }}
                     transition={{ duration: 1, delay: 0.1 + i * 0.1, ease }}
@@ -174,23 +170,23 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.9 }}
-          className="mt-16 grid grid-cols-2 gap-6 border-t border-line py-6 font-mono text-xs text-muted md:grid-cols-4"
+          className="mt-16 grid grid-cols-2 gap-6 border-t border-line py-6 text-sm text-muted md:grid-cols-4"
         >
           <div>
-            <p className="mb-1 text-faint">BASED IN</p>
+            <p className="mb-1 text-faint">Based in</p>
             <p className="text-fg">{profile.location}</p>
           </div>
           <div>
-            <p className="mb-1 text-faint">LOCAL TIME</p>
+            <p className="mb-1 text-faint">Local time</p>
             <p className="tabular-nums text-fg">{time ?? "--:--:--"} KST</p>
           </div>
           <div>
-            <p className="mb-1 text-faint">FOCUS</p>
+            <p className="mb-1 text-faint">Focus</p>
             <p className="text-fg">Cloud · K8s · IaC</p>
           </div>
           <a href="#about" className="group flex items-end justify-between md:justify-end md:gap-3">
-            <span className="text-faint transition-colors group-hover:text-fg">SCROLL</span>
-            <ArrowDown className="size-4 animate-bounce text-accent" />
+            <span className="text-faint transition-colors group-hover:text-fg">Scroll</span>
+            <ArrowDown className="size-4 text-faint transition-colors group-hover:text-fg" />
           </a>
         </motion.div>
       </motion.div>

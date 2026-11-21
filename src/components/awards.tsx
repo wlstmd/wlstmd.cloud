@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ChevronLeft, ChevronRight, Maximize2, Trophy, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 import { awards, timeline } from "@/lib/data";
 import { Reveal, SectionHeader } from "./ui";
 
@@ -36,7 +36,7 @@ function Lightbox({ index, onClose, onStep }: { index: number; onClose: () => vo
       aria-modal="true"
       aria-label={item.title}
     >
-      <div className="flex items-center justify-between px-5 py-4 font-mono text-xs text-muted">
+      <div className="flex items-center justify-between px-5 py-4 text-sm tabular-nums text-muted">
         <span>
           {String(index + 1).padStart(2, "0")} / {String(awards.length).padStart(2, "0")}
         </span>
@@ -93,11 +93,9 @@ export function Awards() {
   );
 
   return (
-    <section id="awards" className="border-t border-line bg-[linear-gradient(to_bottom,var(--color-surface),var(--color-bg)_40%)]">
+    <section id="awards" className="border-t border-line">
       <div className="mx-auto max-w-6xl px-5 py-28 md:px-8 md:py-40">
         <SectionHeader
-          index="02"
-          kicker="Recognition · 2025"
           title={
             <>
               WorldSkills Korea
@@ -112,10 +110,9 @@ export function Awards() {
           <div className="lg:sticky lg:top-28 lg:self-start">
             <Reveal>
               <div className="relative overflow-hidden rounded-3xl border border-line bg-surface p-8">
-                <Trophy className="absolute -right-6 -top-6 size-40 text-white/[0.03]" strokeWidth={1} />
-                <p className="font-mono text-xs uppercase tracking-wider text-muted">Best result</p>
-                <p className="mt-4 text-7xl font-semibold tracking-tighter md:text-8xl">
-                  4<span className="align-top text-4xl text-accent md:text-5xl">th</span>
+                <p className="text-sm text-muted">Best result</p>
+                <p className="mt-4 text-6xl font-semibold tracking-tighter">
+                  4<span className="align-top text-3xl text-muted">th</span>
                 </p>
                 <p className="mt-2 text-lg">National Finals · Excellence Award</p>
               </div>
@@ -125,10 +122,10 @@ export function Awards() {
               {timeline.map((t, i) => (
                 <Reveal key={t.title} delay={0.05 * (i + 1)}>
                   <li className="relative border-l border-line-strong pb-8 pl-8 last:pb-0">
-                    <span className="absolute -left-[5px] top-1.5 size-2.5 rounded-full bg-accent ring-4 ring-bg" />
-                    <p className="font-mono text-xs text-muted">{t.date}</p>
+                    <span className="absolute -left-[4.5px] top-2 size-2 rounded-full bg-fg ring-4 ring-bg" />
+                    <p className="text-sm tabular-nums text-muted">{t.date}</p>
                     <p className="mt-1 text-lg font-medium">{t.title}</p>
-                    <p className="text-accent">{t.detail}</p>
+                    <p className="text-fg/80">{t.detail}</p>
                     <p className="mt-1 text-sm text-faint">{t.note}</p>
                   </li>
                 </Reveal>
