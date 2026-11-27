@@ -118,14 +118,13 @@ export const services: Service[] = [
   { name: "Terminal", url: "https://terminal.wlstmd.cloud" },
   { name: "Blog", url: "https://blog.wlstmd.cloud" },
   { name: "Portfolio", url: "https://portfolio.wlstmd.cloud" },
-  { name: "Linux", url: "https://linux.wlstmd.cloud" },
-  { name: "Web", url: "https://web.wlstmd.cloud" },
   { name: "Tree", url: "https://tree.wlstmd.cloud" },
   { name: "Keycap", url: "https://keycap.wlstmd.cloud" },
-  { name: "KMU Room Finder", url: "https://kmu-room-finder.netlify.app" },
-  { name: "Notion Dashboard", url: "https://notion-dashboard.wlstmd.cloud" },
-  { name: "Metro Mate", url: "https://metro-mate.netlify.app" },
-  { name: "AI Tools", url: "https://ai-tools.wlstmd.cloud", auth: true },
+  { name: "KMU Room Finder", url: "https://kmu-room-finder.wlstmd.cloud" },
+  { name: "Daily AI", url: "https://daily-ai.wlstmd.cloud" },
+  { name: "ArgoCD", url: "https://argo.wlstmd.cloud", auth: true },
+  { name: "Grafana", url: "https://grafana.wlstmd.cloud", auth: true },
+  { name: "Visualized", url: "https://visualized.wlstmd.cloud" },
 ];
 
 export const stats = [
